@@ -4,12 +4,9 @@ const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 
-dotenv.config(); // ✅ MUST (ye missing tha)
+dotenv.config();
 
 const connectDB = require("./config/db");
-
-// DEBUG
-console.log("MONGO_URI:", process.env.MONGO_URI);
 
 connectDB();
 
@@ -20,6 +17,7 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 
+// IMPORTANT
 app.use("/api/users", require("./routes/userRoutes"));
 
 const PORT = process.env.PORT || 5009;
