@@ -10,6 +10,8 @@ const connectDB = require("./config/db");
 
 connectDB();
 
+
+
 const app = express();
 
 app.use(express.json());
@@ -17,10 +19,14 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 
-// IMPORTANT
+
 app.use("/api/users", require("./routes/userRoutes"));
 
 const PORT = process.env.PORT || 5009;
+
+const errorHandeler = require("./middleware/errorMiddleware");
+
+app.use(errorHandeler );
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
